@@ -2,10 +2,19 @@ from rest_framework import serializers
 from .models import User, Problem, Rubric, Contest, ContestProblem, ContestRegistration, Submission, Leaderboard
 
 class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
     class Meta:
         model = User
-        fields = '__all__'
-        extra_kwargs = {'password_hash': {'write_only': True}}
+        fields = ('user_id', 'username', 'email', 'password', 'created_at', 'is_active')
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password']
+        )
+        return user
 
 class ProblemSerializer(serializers.ModelSerializer):
     class Meta:

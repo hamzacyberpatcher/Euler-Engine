@@ -2,7 +2,8 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import (
     UserViewSet, ProblemViewSet, RubricViewSet, ContestViewSet,
-    ContestProblemViewSet, ContestRegistrationViewSet, SubmissionViewSet, LeaderboardViewSet
+    ContestProblemViewSet, ContestRegistrationViewSet, SubmissionViewSet, LeaderboardViewSet,
+    RegisterView
 )
 
 router = DefaultRouter()
@@ -16,5 +17,6 @@ router.register(r'submissions', SubmissionViewSet)
 router.register(r'leaderboards', LeaderboardViewSet)
 
 urlpatterns = [
+    path('register/', RegisterView.as_view(), name='register'),
     path('', include(router.urls)),
 ]

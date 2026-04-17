@@ -19,6 +19,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(max_length=100, unique=True, db_column='Email')
     created_at = models.DateTimeField(auto_now_add=True, db_column='CreatedAt')
     is_active = models.BooleanField(default=True, db_column='IsActive')
+    password = models.CharField(max_length=128, db_column='PasswordHash')
 
     objects = UserManager()
 
