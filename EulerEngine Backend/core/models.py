@@ -43,7 +43,6 @@ class Contest(models.Model):
     title = models.CharField(max_length=200, db_column='Title')
     start_time = models.DateTimeField(db_column='StartTime')
     end_time = models.DateTimeField(db_column='EndTime')
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, db_column='CreatedBy')
     is_active = models.BooleanField(default=True, db_column='IsActive')
 
     class Meta:
