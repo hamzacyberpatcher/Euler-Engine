@@ -1,5 +1,36 @@
+from django.contrib.auth import authenticate
 from rest_framework import serializers
 from .models import User, Problem, Rubric, Contest, ContestProblem, ContestRegistration, Submission, Leaderboard
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField(required=False, allow_blank=True)
+    email = serializers.EmailField(required=False, allow_blank=True)
+    password = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        username = data.get('username')
+        email = data.get('email')
+        password = data.get('password')
+
+        if not password:
+            raise serializers.ValidationError('Password is required.')
+
+        user = None
+
+        if username:
+            user = authenticate(username=username, password=password)
+        elif email:
+            try:
+                user_obj = User.objects.get(email=email)
+                user = authenticate(username=user_obj.username, password=password)
+            except User.DoesNotExist:
+                pass
+
+        if user is None:
+            raise serializers.ValidationError('Invalid login credentials.')
+
+        data['user'] = user
+        return data
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)

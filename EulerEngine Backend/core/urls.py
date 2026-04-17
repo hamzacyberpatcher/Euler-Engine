@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from .views import (
     UserViewSet, ProblemViewSet, RubricViewSet, ContestViewSet,
     ContestProblemViewSet, ContestRegistrationViewSet, SubmissionViewSet, LeaderboardViewSet,
-    RegisterView
+    RegisterView, LoginView
 )
 
 router = DefaultRouter()
@@ -18,5 +18,6 @@ router.register(r'leaderboards', LeaderboardViewSet)
 
 urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
+    path('login/', LoginView.as_view(), name='login'),
     path('', include(router.urls)),
 ]
