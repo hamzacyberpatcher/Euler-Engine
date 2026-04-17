@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 class UserManager(BaseUserManager):
     def create_user(self, username, email, password=None, **extra_fields):
@@ -13,12 +13,24 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-class User(AbstractBaseUser):
+    def create_superuser(self, username, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self.create_user(username, email, password, **extra_fields)
+
+class User(AbstractBaseUser, PermissionsMixin):
     user_id = models.AutoField(primary_key=True, db_column='UserID')
     username = models.CharField(max_length=50, unique=True, db_column='Username')
     email = models.EmailField(max_length=100, unique=True, db_column='Email')
     created_at = models.DateTimeField(auto_now_add=True, db_column='CreatedAt')
     is_active = models.BooleanField(default=True, db_column='IsActive')
+    is_staff = models.BooleanField(default=False, db_column='IsStaff')
     password = models.CharField(max_length=128, db_column='PasswordHash')
 
     objects = UserManager()
