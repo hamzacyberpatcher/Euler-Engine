@@ -1,15 +1,10 @@
 from django.db import models
 
 class User(models.Model):
-    class RoleChoices(models.TextChoices):
-        ADMIN = 'Admin', 'Admin'
-        PARTICIPANT = 'Participant', 'Participant'
-
     user_id = models.AutoField(primary_key=True, db_column='UserID')
     username = models.CharField(max_length=50, unique=True, db_column='Username')
     email = models.EmailField(max_length=100, unique=True, db_column='Email')
     password_hash = models.CharField(max_length=255, db_column='PasswordHash')
-    role = models.CharField(max_length=20, choices=RoleChoices.choices, db_column='Role')
     created_at = models.DateTimeField(auto_now_add=True, db_column='CreatedAt')
     is_active = models.BooleanField(default=True, db_column='IsActive')
 
@@ -28,7 +23,6 @@ class Problem(models.Model):
     statement = models.TextField(db_column='Statement')
     category = models.CharField(max_length=50, choices=CategoryChoices.choices, db_column='Category')
     rating = models.IntegerField(db_column='Rating')
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, db_column='CreatedBy')
     is_deleted = models.BooleanField(default=False, db_column='IsDeleted')
     created_at = models.DateTimeField(auto_now_add=True, db_column='CreatedAt')
 
