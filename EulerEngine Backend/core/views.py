@@ -39,6 +39,18 @@ class ProblemViewSet(viewsets.ModelViewSet):
     queryset = Problem.objects.all()
     serializer_class = ProblemSerializer
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        category = self.request.query_params.get('category')
+        difficulty = self.request.query_params.get('difficulty')
+        
+        if category:
+            queryset = queryset.filter(category__iexact=category)
+        if difficulty:
+            queryset = queryset.filter(rating=difficulty)
+            
+        return queryset
+
 class RubricViewSet(viewsets.ModelViewSet):
     queryset = Rubric.objects.all()
     serializer_class = RubricSerializer
