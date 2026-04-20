@@ -79,7 +79,7 @@ The `core` application exposes several RESTful endpoints through ViewSets and ge
 - `/api/register/` - User Registration
 - `/api/login/` - User Login & Token Generation
 - `/api/users/` - User Management
-- `/api/problems/` - Problem Bank Management
+- `/api/problems/` - Problem Bank Management (Supports filtering via `?category=<category>` and `?difficulty=<rating>`)
 - `/api/rubrics/` - Rubrics Management
 - `/api/contests/` - Contest Management
 - `/api/contest-problems/` - Contest-Problem Association
