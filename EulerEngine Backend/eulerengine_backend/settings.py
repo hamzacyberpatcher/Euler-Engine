@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-h$c#6p9)ahtkeooepirf8uk8+qj+o20s!_uv!+3lr^zi59(3di
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['nekoorder.pythonanywhere.com', 'localhost', '[IP_ADDRESS]']
+ALLOWED_HOSTS = ['nekoorder.pythonanywhere.com', '[IP_ADDRESS]', 'localhost']
 
 
 # Application definition
