@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EulerEngine Auth</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <div class="container">
+        <!-- Login Form -->
+        <div class="form-box" id="login-box">
+            <h2>Welcome Back</h2>
+            <p>Login to EulerEngine</p>
+            <form id="login-form">
+                <div class="input-group">
+                    <input type="text" id="login-username" required placeholder=" ">
+                    <label>Username or Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="login-password" required placeholder=" ">
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="btn" id="login-btn">
+                    <span>Login</span>
+                    <div class="loader"></div>
+                </button>
+            </form>
+            <div class="switch">
+                Don't have an account? <a href="#" id="go-to-register">Register here</a>
+            </div>
+            <div class="message" id="login-message"></div>
+        </div>
+
+        <!-- Register Form -->
+        <div class="form-box hidden" id="register-box">
+            <h2>Join Us</h2>
+            <p>Create your EulerEngine account</p>
+            <form id="register-form">
+                <div class="input-group">
+                    <input type="text" id="reg-username" required placeholder=" ">
+                    <label>Username</label>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="reg-email" required placeholder=" ">
+                    <label>Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="reg-password" required placeholder=" ">
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="btn" id="reg-btn">
+                    <span>Register</span>
+                    <div class="loader"></div>
+                </button>
+            </form>
+            <div class="switch">
+                Already have an account? <a href="#" id="go-to-login">Login here</a>
+            </div>
+            <div class="message" id="register-message"></div>
+        </div>
+        
+        <!-- Authenticated State -->
+        <div class="form-box hidden" id="auth-box">
+            <h2>Dashboard</h2>
+            <p>You are successfully logged in!</p>
+            <div class="user-info">
+                <p><strong>Username:</strong> <span id="auth-username"></span></p>
+                <p><strong>Email:</strong> <span id="auth-email"></span></p>
+                <p><strong>Token:</strong> <span class="token-text" id="auth-token"></span></p>
+            </div>
+            <button class="btn btn-outline" id="logout-btn">Logout</button>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
