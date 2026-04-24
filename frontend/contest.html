@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contest Arena - EulerEngine</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="home-body">
+    <div class="background home-bg">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <nav class="navbar">
+        <div class="nav-brand">EulerEngine <span style="font-size: 14px; color: #4cd137; vertical-align: middle; margin-left: 5px;">Arena</span></div>
+        <div class="nav-links" id="nav-links">
+            <div id="auth-nav-links"></div>
+        </div>
+    </nav>
+
+    <!-- Countdown Overlay -->
+    <div id="arena-countdown-container" class="home-container" style="display: none; justify-content: center; align-items: center; min-height: calc(100vh - 150px); text-align: center;">
+        <div class="admin-form-container" style="max-width: 600px;">
+            <h2 id="countdown-contest-title" style="margin-bottom: 30px;">Contest Name</h2>
+            <p style="color: #a0a0a0; font-size: 18px; margin-bottom: 10px;">The contest begins in:</p>
+            <div id="big-countdown-timer" style="font-size: 64px; font-weight: 600; color: #23a2f6; margin-bottom: 40px; font-family: monospace;">
+                00:00:00:00
+            </div>
+            <p style="color: #808080;">Problems will be revealed automatically when the timer reaches zero.</p>
+        </div>
+    </div>
+
+    <!-- Arena Content -->
+    <div id="arena-main-content" class="home-container">
+        <div class="home-header">
+            <h1 id="arena-contest-title">Loading Contest...</h1>
+            <p id="arena-contest-timer">Contest is active</p>
+        </div>
+
+        <div class="admin-tabs">
+            <button class="tab-btn active" data-tab="arena-problems-tab">Problems</button>
+            <button class="tab-btn" data-tab="arena-submissions-tab">My Submissions</button>
+            <button class="tab-btn" data-tab="arena-leaderboard-tab">Leaderboard</button>
+        </div>
+
+        <!-- Problems Tab -->
+        <div class="tab-content active" id="arena-problems-tab">
+            <div class="contests-grid" id="arena-problems-list">
+                <div class="loader main-loader"></div>
+            </div>
+        </div>
+
+        <!-- Submissions Tab -->
+        <div class="tab-content" id="arena-submissions-tab">
+            <div class="contests-grid" id="arena-submissions-list">
+                <div class="loader main-loader"></div>
+            </div>
+        </div>
+
+        <!-- Leaderboard Tab -->
+        <div class="tab-content" id="arena-leaderboard-tab">
+            <div class="leaderboard-container" id="arena-leaderboard-list">
+                <div class="loader main-loader"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

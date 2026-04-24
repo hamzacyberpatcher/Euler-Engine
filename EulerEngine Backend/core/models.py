@@ -52,20 +52,13 @@ class Problem(models.Model):
     statement = models.TextField(db_column='Statement')
     category = models.CharField(max_length=50, choices=CategoryChoices.choices, db_column='Category')
     rating = models.IntegerField(db_column='Rating')
+    reference_solution = models.TextField(null=True, blank=True, db_column='ReferenceSolution')
+    max_points = models.PositiveIntegerField(default=10, db_column='MaxPoints')
     is_deleted = models.BooleanField(default=False, db_column='IsDeleted')
     created_at = models.DateTimeField(auto_now_add=True, db_column='CreatedAt')
 
     class Meta:
         db_table = 'Problems'
-
-class Rubric(models.Model):
-    rubric_id = models.AutoField(primary_key=True, db_column='RubricID')
-    problem = models.ForeignKey(Problem, on_delete=models.CASCADE, db_column='ProblemID')
-    step_description = models.TextField(db_column='StepDescription')
-    max_points = models.PositiveIntegerField(db_column='MaxPoints')
-
-    class Meta:
-        db_table = 'Rubrics'
 
 class Contest(models.Model):
     contest_id = models.CharField(max_length=200, primary_key=True, db_column='ContestID')
@@ -108,6 +101,7 @@ class Submission(models.Model):
     answer_text = models.TextField(db_column='AnswerText')
     submitted_at = models.DateTimeField(auto_now_add=True, db_column='SubmittedAt')
     score = models.IntegerField(null=True, blank=True, default=0, db_column='Score')
+    ai_feedback = models.TextField(null=True, blank=True, db_column='AIFeedback')
     grading_status = models.CharField(max_length=20, choices=GradingStatusChoices.choices, default=GradingStatusChoices.PENDING, db_column='GradingStatus')
 
     class Meta:

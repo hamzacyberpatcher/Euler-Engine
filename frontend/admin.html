@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - EulerEngine</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="home-body">
+    <div class="background home-bg">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <nav class="navbar">
+        <div class="nav-brand">EulerEngine <span style="font-size: 14px; color: #ff512f; vertical-align: middle; margin-left: 5px;">Admin</span></div>
+        <div class="nav-links" id="nav-links">
+            <div id="auth-nav-links"></div>
+        </div>
+    </nav>
+
+    <div class="home-container">
+        <div class="home-header">
+            <h1>Admin Dashboard</h1>
+            <p>Manage contests, problems, and assignments.</p>
+        </div>
+
+        <div class="admin-tabs">
+            <button class="tab-btn active" data-tab="contest-tab">Contests</button>
+            <button class="tab-btn" data-tab="problem-tab">Problems</button>
+            <button class="tab-btn" data-tab="assign-tab">Assignments</button>
+        </div>
+
+        <!-- Contest Tab -->
+        <div class="tab-content active" id="contest-tab">
+            <div class="admin-form-container">
+                <h2>Create New Contest</h2>
+                <form id="admin-contest-form">
+                    <input type="text" id="contest-id" placeholder="Contest ID (e.g., C001)" required>
+                    <input type="text" id="contest-title" placeholder="Contest Title" required>
+                    <label style="display:block; margin: 15px 0 5px; color:#a0a0a0; font-size:14px;">Start Time</label>
+                    <input type="datetime-local" id="contest-start" required>
+                    <label style="display:block; margin: 15px 0 5px; color:#a0a0a0; font-size:14px;">End Time</label>
+                    <input type="datetime-local" id="contest-end" required>
+                    <div class="message" id="admin-contest-message"></div>
+                    <button class="btn" id="create-contest-btn">
+                        <span>Create Contest</span>
+                        <div class="loader"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Problem Tab -->
+        <div class="tab-content" id="problem-tab">
+            <div class="admin-form-container">
+                <h2>Create New Problem</h2>
+                <form id="admin-problem-form">
+                    <input type="text" id="problem-id" placeholder="Problem ID (e.g., P001)" required>
+                    <input type="text" id="problem-title" placeholder="Problem Title" required>
+                    <textarea id="problem-statement" placeholder="Problem Statement" required style="min-height: 120px; margin-bottom: 20px;"></textarea>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                        <select id="problem-category" required>
+                            <option value="" disabled selected>Category</option>
+                            <option value="Algebra">Algebra</option>
+                            <option value="Calculus">Calculus</option>
+                            <option value="Polynomials">Polynomials</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <input type="number" id="problem-rating" placeholder="Difficulty (Points)" required>
+                    </div>
+
+                    <h3 style="color: #23a2f6; font-size: 16px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">AI Grading Configuration</h3>
+                    <textarea id="problem-solution" placeholder="Reference Solution (Correct Explanation for AI)" required style="min-height: 120px; margin-bottom: 20px;"></textarea>
+                    
+                    <div class="message" id="admin-problem-message"></div>
+                    <button class="btn" id="create-problem-btn">
+                        <span>Create Problem</span>
+                        <div class="loader"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Assign Tab -->
+        <div class="tab-content" id="assign-tab">
+            <div class="admin-form-container">
+                <h2>Assign Problem to Contest</h2>
+                <form id="admin-assign-form">
+                    <select id="assign-contest" required style="margin-bottom: 20px;">
+                        <option value="" disabled selected>Select Contest</option>
+                    </select>
+                    <select id="assign-problem" required style="margin-bottom: 20px;">
+                        <option value="" disabled selected>Select Problem</option>
+                    </select>
+                    <input type="number" id="assign-points" placeholder="Point Value for this contest" required>
+                    <div class="message" id="admin-assign-message"></div>
+                    <button class="btn" id="assign-btn">
+                        <span>Assign Problem</span>
+                        <div class="loader"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

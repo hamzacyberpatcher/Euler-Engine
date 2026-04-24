@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate
 from rest_framework import serializers
-from .models import User, Problem, Rubric, Contest, ContestProblem, ContestRegistration, Submission, Leaderboard
+from .models import User, Problem, Contest, ContestProblem, ContestRegistration, Submission, Leaderboard
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(required=False, allow_blank=True)
@@ -52,11 +52,6 @@ class ProblemSerializer(serializers.ModelSerializer):
         model = Problem
         fields = '__all__'
 
-class RubricSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Rubric
-        fields = '__all__'
-
 class ContestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contest
@@ -68,9 +63,10 @@ class ContestProblemSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ContestRegistrationSerializer(serializers.ModelSerializer):
+    user_username = serializers.ReadOnlyField(source='user.username')
     class Meta:
         model = ContestRegistration
-        fields = '__all__'
+        fields = ('registration_id', 'contest', 'user', 'user_username', 'registered_at')
 
 class SubmissionSerializer(serializers.ModelSerializer):
     class Meta:

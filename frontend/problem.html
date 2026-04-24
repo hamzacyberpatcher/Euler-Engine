@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solve Problem - EulerEngine</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="home-body">
+    <div class="background home-bg">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <nav class="navbar">
+        <div class="nav-brand">EulerEngine <span style="font-size: 14px; color: #23a2f6; vertical-align: middle; margin-left: 5px;">Solver</span></div>
+        <div class="nav-links" id="nav-links">
+            <div id="auth-nav-links"></div>
+        </div>
+    </nav>
+
+    <div class="problem-split-view">
+        <!-- Left Side: Problem Info -->
+        <div class="problem-pane">
+            <div class="pane-header">
+                <h1 id="prob-title">Loading Problem...</h1>
+                <div class="prob-tags">
+                    <span id="prob-category" class="tag">Category</span>
+                    <span id="prob-rating" class="tag">Rating</span>
+                </div>
+            </div>
+            <div class="prob-content">
+                <h3>Problem Statement</h3>
+                <div id="prob-statement" class="statement-text">
+                    <!-- Loaded via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Submission -->
+        <div class="submit-pane">
+            <div class="pane-header">
+                <h2>Your Solution</h2>
+            </div>
+            <div class="editor-container">
+                <textarea id="solution-text" placeholder="Type your answer or paste your code here..." required></textarea>
+            </div>
+            <div class="submit-footer">
+                <div id="submission-msg" class="message"></div>
+                <button class="btn" id="submit-prob-btn">
+                    <span>Submit Solution</span>
+                    <div class="loader"></div>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
