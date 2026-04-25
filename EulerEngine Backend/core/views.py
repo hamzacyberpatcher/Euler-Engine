@@ -1,6 +1,7 @@
 import threading
 import requests
 import re
+from django.utils import timezone
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -151,6 +152,24 @@ class SubmissionViewSet(viewsets.ModelViewSet):
         return queryset
 
     def perform_create(self, serializer):
+        contest = serializer.validated_data['contest']
+        user = serializer.validated_data['user']
+        
+        # Check if contest has ended
+        if timezone.now() > contest.end_time:
+            from rest_framework.exceptions import ValidationError
+            raise ValidationError("This contest has ended. Submissions are closed.")
+        
+        # Check if contest has started
+        if timezone.now() < contest.start_time:
+            from rest_framework.exceptions import ValidationError
+            raise ValidationError("This contest has not started yet.")
+
+        # Check if user is registered
+        if not ContestRegistration.objects.filter(contest=contest, user=user).exists():
+            from rest_framework.exceptions import ValidationError
+            raise ValidationError("You must be registered for this contest to submit.")
+
         instance = serializer.save()
         # Trigger grading in background
         threading.Thread(target=grade_submission_task, args=(instance.submission_id,)).start()

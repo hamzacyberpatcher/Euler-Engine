@@ -140,8 +140,9 @@ async function initArenaPage() {
             fetch(`${API_URL}/contests/${cId}/`)
         ]);
         const rs = await rR.json(); if ((rs.results || rs).length === 0) { window.location.href = `registration.html?contest_id=${cId}`; return; }
-        const c = await cR.json(), sT = new Date(c.start_time);
-        if (new Date() < sT) {
+        const c = await cR.json(), sT = new Date(c.start_time), eT = new Date(c.end_time);
+        const now = new Date();
+        if (now < sT) {
             arenaMainContent.style.display = 'none'; arenaCountdownContainer.style.display = 'flex'; countdownContestTitle.textContent = c.title;
             const tI = setInterval(() => {
                 const diff = sT - new Date(); if (diff <= 0) { clearInterval(tI); window.location.reload(); return; }
@@ -149,7 +150,11 @@ async function initArenaPage() {
                 bigCountdownTimer.textContent = `${ds.toString().padStart(2, '0')}:${hs.toString().padStart(2, '0')}:${ms.toString().padStart(2, '0')}:${ss.toString().padStart(2, '0')}`;
             }, 1000); return;
         }
-        arenaContestTitle.textContent = c.title;
+        
+        const isEnded = now > eT;
+        arenaContestTitle.innerHTML = c.title + (isEnded ? ' <span style="color: #ff512f; font-size: 18px; vertical-align: middle; margin-left: 15px;">[ENDED]</span>' : '');
+        const timerMsg = document.getElementById('arena-contest-timer');
+        if (timerMsg) timerMsg.textContent = isEnded ? 'Contest has ended. Submissions are closed.' : 'Contest is active';
         const pR = await fetch(`${API_URL}/contest-problems/?contest=${cId}`);
         const pJson = await pR.json();
         const ps = pJson.results || pJson;
@@ -212,8 +217,21 @@ async function initProblemPage() {
     const p = new URLSearchParams(window.location.search), pId = p.get('problem_id'), cId = p.get('contest_id'), user = getAuthUser();
     if (!user || !pId || !cId) { window.location.href = 'index.html'; return; }
     try {
-        const r = await fetch(`${API_URL}/problems/${pId}/`), pD = await r.json();
+        const [rP, rC] = await Promise.all([fetch(`${API_URL}/problems/${pId}/`), fetch(`${API_URL}/contests/${cId}/`)]);
+        const pD = await rP.json(), cD = await rC.json();
+        const isEnded = new Date() > new Date(cD.end_time);
+        
         probTitle.textContent = pD.title; probCategory.textContent = pD.category; probRating.textContent = `${pD.rating} Points`; probStatement.textContent = pD.statement;
+        
+        if (isEnded) {
+            submitProbBtn.disabled = true;
+            submitProbBtn.textContent = 'Contest Ended';
+            submitProbBtn.style.background = '#3d4255';
+            submitProbBtn.style.cursor = 'not-allowed';
+            solutionText.disabled = true;
+            solutionText.placeholder = 'Contest has ended. You can no longer submit solutions.';
+            showMessage(submissionMsg, 'Contest has ended. Submissions are closed.', true);
+        }
     } catch (e) { console.error(e); }
     submitProbBtn.onclick = async () => {
         const t = solutionText.value.trim(); if (!t) return;
