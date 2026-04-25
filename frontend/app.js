@@ -151,7 +151,8 @@ async function initArenaPage() {
         }
         arenaContestTitle.textContent = c.title;
         const pR = await fetch(`${API_URL}/contest-problems/?contest=${cId}`);
-        const ps = (await pR.json()).results || (await pR.json());
+        const pJson = await pR.json();
+        const ps = pJson.results || pJson;
         arenaProblemsList.innerHTML = '';
         if (ps.length === 0) arenaProblemsList.innerHTML = '<div>No problems assigned.</div>';
         else {
@@ -237,7 +238,8 @@ if (tabBtns.length > 0) {
 async function fetchAdminData() {
     try {
         const [cR, pR] = await Promise.all([fetch(`${API_URL}/contests/`), fetch(`${API_URL}/problems/`)]);
-        const cs = (await cR.json()).results || (await cR.json()), ps = (await pR.json()).results || (await pR.json());
+        const cJson = await cR.json(), pJson = await pR.json();
+        const cs = cJson.results || cJson, ps = pJson.results || pJson;
         if (assignContestSelect) { assignContestSelect.innerHTML = '<option value="" disabled selected>Select Contest</option>'; cs.forEach(c => assignContestSelect.innerHTML += `<option value="${c.contest_id}">${c.title}</option>`); }
         if (assignProblemSelect) { assignProblemSelect.innerHTML = '<option value="" disabled selected>Select Problem</option>'; ps.forEach(p => assignProblemSelect.innerHTML += `<option value="${p.problem_id}">${p.title}</option>`); }
     } catch (e) { console.error(e); }
