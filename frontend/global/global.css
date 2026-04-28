@@ -321,6 +321,9 @@ p {
     transform: translateY(-2px);
 }
 
+
+
+/* Common Layout Styles (Moved from index.css) */
 /* Home Page Specifics */
 .home-body {
     display: block;
@@ -442,6 +445,16 @@ p {
     gap: 5px;
 }
 
+.tag {
+    background: rgba(35, 162, 246, 0.1);
+    color: #23a2f6;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
 .main-loader {
     display: block;
     margin: 50px auto;
@@ -460,6 +473,9 @@ p {
     border: 1px dashed rgba(255, 255, 255, 0.1);
 }
 
+
+
+/* Shared Tab and Form Styles (Moved from admin.css) */
 /* Admin Panel Styles */
 .admin-tabs {
     display: flex;
@@ -573,151 +589,3 @@ p {
     -webkit-text-fill-color: transparent;
 }
 
-/* Problem Split View */
-.problem-split-view {
-    display: flex;
-    height: calc(100vh - 110px);
-    margin: 20px;
-    gap: 20px;
-    padding-bottom: 20px;
-}
-
-.problem-pane,
-.submit-pane {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.pane-header {
-    padding: 30px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.pane-header h1,
-.pane-header h2 {
-    margin-bottom: 10px;
-    font-size: 28px;
-}
-
-.prob-tags {
-    display: flex;
-    gap: 10px;
-}
-
-.tag {
-    background: rgba(35, 162, 246, 0.1);
-    color: #23a2f6;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.prob-content {
-    padding: 30px;
-    overflow-y: auto;
-    flex-grow: 1;
-}
-
-.statement-text {
-    line-height: 1.8;
-    color: #e0e0e0;
-    font-size: 16px;
-    margin-top: 20px;
-    white-space: pre-wrap;
-}
-
-.editor-container {
-    flex-grow: 1;
-    padding: 20px;
-}
-
-#solution-text {
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    padding: 20px;
-    color: #fff;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 15px;
-    resize: none;
-    outline: none;
-    transition: border-color 0.3s ease;
-}
-
-#solution-text:focus {
-    border-color: #23a2f6;
-}
-
-.submit-footer {
-    padding: 20px 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.submit-footer .btn {
-    width: auto;
-    padding: 0 40px;
-    margin-top: 0;
-}
-
-/* Leaderboard Styles */
-.leaderboard-container {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 30px;
-    overflow-x: auto;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.leaderboard-table {
-    width: 100%;
-    border-collapse: collapse;
-    color: #fff;
-    font-size: 15px;
-}
-
-.leaderboard-table th {
-    text-align: left;
-    padding: 15px 20px;
-    color: #23a2f6;
-    font-weight: 600;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.02);
-}
-
-.leaderboard-table td {
-    padding: 15px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.leaderboard-table tr:hover {
-    background: rgba(255, 255, 255, 0.03);
-}
-
-.score-cell {
-    font-weight: 600;
-    color: #4cd137;
-}
-
-.score-cell.zero {
-    color: #808080;
-    font-weight: 400;
-}
-
-.rank-cell {
-    font-weight: 600;
-    color: #ffd700;
-    /* Gold */
-}
-}
