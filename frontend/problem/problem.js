@@ -1,14 +1,13 @@
 async function initProblemPage() {
-    if (!submitProbBtn) return;
     const p = new URLSearchParams(window.location.search), pId = p.get('problem_id'), cId = p.get('contest_id'), user = getAuthUser();
     if (!user || !pId || !cId) { window.location.href = '../home/index.html'; return; }
     try {
         const [rP, rC] = await Promise.all([fetch(`${API_URL}/problems/${pId}/`), fetch(`${API_URL}/contests/${cId}/`)]);
         const pD = await rP.json(), cD = await rC.json();
         const isEnded = new Date() > new Date(cD.end_time);
-        
+
         probTitle.textContent = pD.title; probCategory.textContent = pD.category; probRating.textContent = `${pD.rating} Points`; probStatement.textContent = pD.statement;
-        
+
         if (isEnded) {
             submitProbBtn.disabled = true;
             submitProbBtn.textContent = 'Contest Ended';

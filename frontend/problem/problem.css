@@ -89,3 +89,26 @@
     margin-top: 0;
 }
 
+/* ========================================= */
+/* Responsive Design / Media Queries         */
+/* ========================================= */
+
+@media (max-width: 768px) {
+    .problem-split-view {
+        flex-direction: column;
+        height: auto;
+        min-height: calc(100vh - 150px);
+        margin: 10px;
+    }
+
+    .problem-pane,
+    .submit-pane {
+        flex: none;
+        height: auto;
+        min-height: 400px;
+    }
+
+    .editor-container {
+        min-height: 300px;
+    }
+}
