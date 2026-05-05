@@ -589,3 +589,73 @@ p {
     -webkit-text-fill-color: transparent;
 }
 
+/* ========================================= */
+/* Responsive Design / Media Queries         */
+/* ========================================= */
+
+@media (max-width: 768px) {
+    /* Navbar */
+    .navbar {
+        padding: 0 20px;
+        flex-direction: column;
+        height: auto;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        gap: 15px;
+    }
+    
+    .home-body {
+        padding-top: 140px; /* Make room for taller navbar */
+    }
+
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #auth-nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* General Containers */
+    .container {
+        padding: 30px 20px;
+        width: 100%;
+    }
+
+    .home-container {
+        padding: 0 15px 40px;
+    }
+
+    .home-header h1 {
+        font-size: 36px;
+    }
+
+    /* Contest Cards */
+    .contest-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .contest-meta-container {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    /* Admin Panel */
+    .admin-tabs {
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        flex: 1 1 auto;
+        text-align: center;
+    }
+
+    .admin-form-container {
+        padding: 20px;
+    }
+}

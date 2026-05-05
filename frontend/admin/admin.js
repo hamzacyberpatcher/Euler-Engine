@@ -1,12 +1,10 @@
 // Admin Panel
-if (tabBtns.length > 0) {
-    tabBtns.forEach(b => b.addEventListener('click', () => {
-        tabBtns.forEach(x => x.classList.remove('active')); b.classList.add('active');
-        tabContents.forEach(c => c.classList.remove('active'));
-        const tId = b.getAttribute('data-tab'); document.getElementById(tId).classList.add('active');
-        if (tId === 'assign-tab') fetchAdminData();
-    }));
-}
+tabBtns.forEach(b => b.addEventListener('click', () => {
+    tabBtns.forEach(x => x.classList.remove('active')); b.classList.add('active');
+    tabContents.forEach(c => c.classList.remove('active'));
+    const tId = b.getAttribute('data-tab'); document.getElementById(tId).classList.add('active');
+    if (tId === 'assign-tab') fetchAdminData();
+}));
 
 async function fetchAdminData() {
     try {
